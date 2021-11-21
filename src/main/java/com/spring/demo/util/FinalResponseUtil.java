@@ -10,11 +10,11 @@ import com.spring.demo.response.FinalResponse;
 public class FinalResponseUtil {
 	
 	public static ResponseEntity<FinalResponse> getFinalResponse(DemoException e) {
-		return new ResponseEntity<FinalResponse>(new FinalResponse(((DemoException)e).getCode(),e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<FinalResponse>(new FinalResponse(((DemoException)e).getCode(),e.getMessage()), HttpStatus.OK);
 	}
 	
 	public static ResponseEntity<FinalResponse> getFinalResponse(Exception e) {
-		return new ResponseEntity<FinalResponse>(new FinalResponse(DemoErrorConstant.INTERNAL_SERVER_ERROR_CODE, DemoErrorConstant.INTERNAL_SERVER_ERROR_MSG), HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<FinalResponse>(new FinalResponse(DemoErrorConstant.INTERNAL_SERVER_ERROR_CODE, DemoErrorConstant.INTERNAL_SERVER_ERROR_MSG), HttpStatus.OK);
 	}
 	
 	public static ResponseEntity<FinalResponse> getFinalResponse(Object body) {

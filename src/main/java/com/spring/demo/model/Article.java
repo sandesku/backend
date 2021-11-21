@@ -28,7 +28,7 @@ public class Article extends AbstractModel {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)  
 	@JoinColumn(name="article_id")
 	@OrderColumn(name="article_order")
-	private List<Body> bodyList;
+	private List<ArticleBody> articleBodyList;
 	
 	@Column(name = "conclusion", nullable = false)
 	private String conclusion;
@@ -56,13 +56,13 @@ public class Article extends AbstractModel {
 	public void setOverview(String overview) {
 		this.overview = overview;
 	}
-	
-	public List<Body> getBodyList() {
-		return bodyList;
+
+	public List<ArticleBody> getArticleBodyList() {
+		return articleBodyList;
 	}
 
-	public void setBodyList(List<Body> bodyList) {
-		this.bodyList = bodyList;
+	public void setArticleBodyList(List<ArticleBody> articleBodyList) {
+		this.articleBodyList = articleBodyList;
 	}
 
 	public String getConclusion() {
