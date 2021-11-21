@@ -23,9 +23,6 @@ public class RequestResponseGeneratorUtil {
 		List<Body> bodyList = new ArrayList<Body>();
 		Article article = new Article();
 		article.setCode(String.valueOf(new Date().getTime()));
-		if(request.getCode()!=null) {
-			article.setCode(request.getCode());
-		}
 		article.setHeadline(request.getHeadline());
 		article.setOverview(request.getOverview());
 		article.setConclusion(request.getConclusion());
@@ -82,9 +79,9 @@ public class RequestResponseGeneratorUtil {
 	}
 	
 	public static void updateArticle(ArticleRequest request, Article article) {
-		article.setHeadline(article.getHeadline());
-		article.setOverview(article.getOverview());
-		article.setConclusion(article.getConclusion());
+		article.setHeadline(request.getHeadline());
+		article.setOverview(request.getOverview());
+		article.setConclusion(request.getConclusion());
 		List<Body> bodyList = article.getBodyList();
 		List<ArticleBodyRequest> bodyRequestList = request.getBodyList();
 		for(int i=0;i<bodyList.size();i++) {

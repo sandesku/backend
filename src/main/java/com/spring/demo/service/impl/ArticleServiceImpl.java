@@ -28,7 +28,7 @@ public class ArticleServiceImpl implements ArticleService{
 	public String createArticle(ArticleRequest request) throws DemoException {
 		Article article = RequestResponseGeneratorUtil.getArticle(request);
 		articleDao.createArticle(article);
-		return "Article successfully created";
+		return article.getCode();
 	}
 	
 	@Override
@@ -36,7 +36,7 @@ public class ArticleServiceImpl implements ArticleService{
 		Article article = articleDao.getArticle(request.getCode());
 		RequestResponseGeneratorUtil.updateArticle(request, article);
 		articleDao.updateArticle(article);
-		return "Article successfully updated";
+		return article.getCode();
 	}
 
 	@Override

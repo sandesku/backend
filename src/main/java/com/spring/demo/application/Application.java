@@ -11,13 +11,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EntityScan(basePackages = {"com.spring.demo.model"})
 @SpringBootApplication(scanBasePackages = { "com.spring.demo"})
 public class Application {
-	
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
     
     @Bean
-	public WebMvcConfigurer corsConfigurer() {
+	public WebMvcConfigurer webMvcConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {

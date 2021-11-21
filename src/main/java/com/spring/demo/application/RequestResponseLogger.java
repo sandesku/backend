@@ -22,14 +22,13 @@ public class RequestResponseLogger implements Filter {
         ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper((HttpServletRequest) request);
         ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper((HttpServletResponse) response);
         
+        String requestBody = new String(requestWrapper.getContentAsByteArray());
+        logger.info("Request: {} {}",requestWrapper.getRequestURI(), requestBody);
         try {
             chain.doFilter(requestWrapper, responseWrapper);
         } finally {
-            String requestBody = new String(requestWrapper.getContentAsByteArray());
-            logger.info("Request body {}",requestBody);
             String responseBody = new String(responseWrapper.getContentAsByteArray());
-            logger.info("Response body {}",responseBody);
-            // Do not forget this line after reading response content or actual response will be empty!
+            logger.info("Response: {}",responseBody);
             responseWrapper.copyBodyToResponse();
         }
     }
