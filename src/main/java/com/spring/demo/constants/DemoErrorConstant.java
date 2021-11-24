@@ -28,4 +28,7 @@ public class DemoErrorConstant {
 	
 	public static final int INTERNAL_AUTH_MISSING_CODE = 1006;
 	public static final String INTERNAL_AUTH_MISSING_MSG = "internal_auth_key is missing or blank";
+	
+	public static final int USER_AUTH_MISSING_CODE = 1007;
+	public static final String USER_AUTH_MISSING_MSG = "username or password are missing or blank";
 }
