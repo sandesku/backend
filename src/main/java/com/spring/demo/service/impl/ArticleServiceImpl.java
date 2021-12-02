@@ -49,6 +49,9 @@ public class ArticleServiceImpl implements ArticleService{
 	@Override
 	public ArticleResponse getArticle(String code) throws DemoException {
 		Article article = articleDao.getArticle(code);
+		article.setVisited(article.getVisited() + 1);
+		articleDao.updateArticle(article);
+		
 		return RequestResponseGeneratorUtil.getArticleResponse(article);
 	}
 

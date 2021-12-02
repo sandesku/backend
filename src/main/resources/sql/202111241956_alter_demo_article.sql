@@ -1,0 +1,1 @@
+ALTER TABLE `demo_article` ADD COLUMN `visited` bigint unsigned NOT NULL DEFAULT 0; 

@@ -32,6 +32,9 @@ public class Article extends AbstractModel {
 	
 	@Column(name = "conclusion", nullable = false)
 	private String conclusion;
+	
+	@Column(name = "visited", nullable = false)
+	private Long visited = 0L;
 
 	public String getCode() {
 		return code;
@@ -71,5 +74,13 @@ public class Article extends AbstractModel {
 
 	public void setConclusion(String conclusion) {
 		this.conclusion = conclusion;
+	}
+
+	public Long getVisited() {
+		return visited;
+	}
+
+	public void setVisited(Long visited) {
+		this.visited = visited;
 	}
 }
