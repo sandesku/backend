@@ -28,10 +28,13 @@ public class Article extends AbstractModel {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)  
 	@JoinColumn(name="article_id")
 	@OrderColumn(name="article_order")
-	private List<Body> bodyList;
+	private List<ArticleBody> articleBodyList;
 	
 	@Column(name = "conclusion", nullable = false)
 	private String conclusion;
+	
+	@Column(name = "visited", nullable = false)
+	private Long visited = 0L;
 
 	public String getCode() {
 		return code;
@@ -56,13 +59,13 @@ public class Article extends AbstractModel {
 	public void setOverview(String overview) {
 		this.overview = overview;
 	}
-	
-	public List<Body> getBodyList() {
-		return bodyList;
+
+	public List<ArticleBody> getArticleBodyList() {
+		return articleBodyList;
 	}
 
-	public void setBodyList(List<Body> bodyList) {
-		this.bodyList = bodyList;
+	public void setArticleBodyList(List<ArticleBody> articleBodyList) {
+		this.articleBodyList = articleBodyList;
 	}
 
 	public String getConclusion() {
@@ -71,5 +74,13 @@ public class Article extends AbstractModel {
 
 	public void setConclusion(String conclusion) {
 		this.conclusion = conclusion;
+	}
+
+	public Long getVisited() {
+		return visited;
+	}
+
+	public void setVisited(Long visited) {
+		this.visited = visited;
 	}
 }

@@ -23,19 +23,19 @@ public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
 	
-	@DemoApi(internalAuth = true)
+	@DemoApi(userAuth = true)
     @RequestMapping(path = DemoUrlConstant.ARTICLE_CREATE_URL, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FinalResponse> createArticle(@RequestBody ArticleRequest createArticleRequest) throws DemoException {
     	return FinalResponseUtil.getFinalResponse(articleService.createArticle(createArticleRequest));
     }
     
-	@DemoApi(internalAuth = true)
+	@DemoApi(userAuth = true)
     @RequestMapping(path = DemoUrlConstant.ARTICLE_UPDATE_URL, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FinalResponse> updateArticle(@RequestBody ArticleRequest request) throws DemoException {
     	return FinalResponseUtil.getFinalResponse(articleService.updateArticle(request));
     }
     
-	@DemoApi(internalAuth = true)
+	@DemoApi(userAuth = true)
     @RequestMapping(path = DemoUrlConstant.ARTICLE_REMOVE_URL, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FinalResponse> removeArticle(@PathVariable String code) throws DemoException {
     	return FinalResponseUtil.getFinalResponse(articleService.removeArticle(code));

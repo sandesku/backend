@@ -20,5 +20,10 @@ public @interface DemoApi {
 	 * Internal auth.
 	 */
 	boolean internalAuth() default false;
+	
+	/**
+	 * Internal auth.
+	 */
+	boolean userAuth() default false;
 
 }

@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "demo_article_body")
-public class Body extends AbstractModel {
+public class ArticleBody extends AbstractModel {
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name = "title")

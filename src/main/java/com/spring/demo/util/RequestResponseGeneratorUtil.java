@@ -7,47 +7,44 @@ import java.util.List;
 import org.springframework.util.CollectionUtils;
 
 import com.spring.demo.model.Article;
-import com.spring.demo.model.Body;
+import com.spring.demo.model.ArticleBody;
 import com.spring.demo.request.ArticleBodyRequest;
 import com.spring.demo.request.ArticleRequest;
 import com.spring.demo.response.ArticleBodyResponse;
 import com.spring.demo.response.ArticleResponse;
 
 public class RequestResponseGeneratorUtil {
-	
+
 	public static Article getArticle(ArticleRequest request) {
-		if(request == null) {
+		if (request == null) {
 			return null;
 		}
-		
-		List<Body> bodyList = new ArrayList<Body>();
+
+		List<ArticleBody> articleBodyList = new ArrayList<ArticleBody>();
 		Article article = new Article();
 		article.setCode(String.valueOf(new Date().getTime()));
-		if(request.getCode()!=null) {
-			article.setCode(request.getCode());
-		}
 		article.setHeadline(request.getHeadline());
 		article.setOverview(request.getOverview());
 		article.setConclusion(request.getConclusion());
-		for(ArticleBodyRequest articleBodyRequest: request.getBodyList()) {
-			Body body = new Body();
-			body.setTitle(articleBodyRequest.getTitle());
-			body.setContent(articleBodyRequest.getContent());
-			body.setStatement(articleBodyRequest.getStatement());
-			bodyList.add(body);
+		for (ArticleBodyRequest articleBodyRequest : request.getArticleBodyList()) {
+			ArticleBody articleBody = new ArticleBody();
+			articleBody.setTitle(articleBodyRequest.getTitle());
+			articleBody.setContent(articleBodyRequest.getContent());
+			articleBody.setStatement(articleBodyRequest.getStatement());
+			articleBodyList.add(articleBody);
 		}
-		article.setBodyList(bodyList);
+		article.setArticleBodyList(articleBodyList);
 
 		return article;
 	}
-	
+
 	public static List<ArticleResponse> getArticleResponseList(List<Article> articleList) {
-		if(CollectionUtils.isEmpty(articleList)) {
+		if (CollectionUtils.isEmpty(articleList)) {
 			return null;
 		}
-		
+
 		List<ArticleResponse> response = new ArrayList<ArticleResponse>();
-		for(Article article:articleList) {
+		for (Article article : articleList) {
 			ArticleResponse articleResponse = new ArticleResponse();
 			articleResponse.setCode(article.getCode());
 			articleResponse.setHeadline(article.getHeadline());
@@ -57,42 +54,42 @@ public class RequestResponseGeneratorUtil {
 		}
 		return response;
 	}
-	
+
 	public static ArticleResponse getArticleResponse(Article article) {
-		if(article == null) {
+		if (article == null) {
 			return null;
 		}
-		
-		List<ArticleBodyResponse> bodyList = new ArrayList<ArticleBodyResponse>();
+
+		List<ArticleBodyResponse> artcielBodyList = new ArrayList<ArticleBodyResponse>();
 		ArticleResponse articleResponse = new ArticleResponse();
 		articleResponse.setCode(article.getCode());
 		articleResponse.setHeadline(article.getHeadline());
 		articleResponse.setOverview(article.getOverview());
 		articleResponse.setConclusion(article.getConclusion());
-		for(Body body:article.getBodyList()) {
+		for (ArticleBody articleBody : article.getArticleBodyList()) {
 			ArticleBodyResponse articleBodyResponse = new ArticleBodyResponse();
-			articleBodyResponse.setContent(body.getContent());
-			articleBodyResponse.setStatement(body.getStatement());
-			articleBodyResponse.setTitle(body.getTitle());
-			bodyList.add(articleBodyResponse);
+			articleBodyResponse.setContent(articleBody.getContent());
+			articleBodyResponse.setStatement(articleBody.getStatement());
+			articleBodyResponse.setTitle(articleBody.getTitle());
+			artcielBodyList.add(articleBodyResponse);
 		}
-		articleResponse.setBodyList(bodyList);
-		
+		articleResponse.setArticleBodyList(artcielBodyList);
+
 		return articleResponse;
 	}
-	
+
 	public static void updateArticle(ArticleRequest request, Article article) {
-		article.setHeadline(article.getHeadline());
-		article.setOverview(article.getOverview());
-		article.setConclusion(article.getConclusion());
-		List<Body> bodyList = article.getBodyList();
-		List<ArticleBodyRequest> bodyRequestList = request.getBodyList();
-		for(int i=0;i<bodyList.size();i++) {
-			Body body = bodyList.get(i);
-			ArticleBodyRequest bodyRequest = bodyRequestList.get(i);
-			body.setTitle(bodyRequest.getTitle());
-			body.setContent(bodyRequest.getContent());
-			body.setStatement(bodyRequest.getStatement());
+		article.setHeadline(request.getHeadline());
+		article.setOverview(request.getOverview());
+		article.setConclusion(request.getConclusion());
+		List<ArticleBody> articleBodyList = article.getArticleBodyList();
+		List<ArticleBodyRequest> requestBodyList = request.getArticleBodyList();
+		for (int i = 0; i < articleBodyList.size(); i++) {
+			ArticleBody articleBody = articleBodyList.get(i);
+			ArticleBodyRequest requestBody = requestBodyList.get(i);
+			articleBody.setTitle(requestBody.getTitle());
+			articleBody.setContent(requestBody.getContent());
+			articleBody.setStatement(requestBody.getStatement());
 		}
 	}
 }

@@ -16,6 +16,7 @@ import com.spring.demo.constants.DemoErrorConstant;
 import com.spring.demo.exception.DemoException;
 import com.spring.demo.service.ConfigService;
 import com.spring.demo.util.DemoUtil;
+import com.spring.demo.util.EncryptionionUtil;
 
 public class AuthenticationInterceptor implements HandlerInterceptor{
 	
@@ -46,6 +47,20 @@ public class AuthenticationInterceptor implements HandlerInterceptor{
 						}
 					}
 					throw new DemoException(DemoErrorConstant.INTERNAL_AUTH_MISSING_CODE, DemoErrorConstant.INTERNAL_AUTH_MISSING_MSG);
+				}
+				
+				if (demoApi.userAuth()) {
+					String usernameHeader = request.getHeader(DemoConstant.USERNAME_HEADER);
+					String passwordHeader = request.getHeader(DemoConstant.PASSWORD_HEADER);
+					if(DemoUtil.isStringNotEmpty(usernameHeader) && DemoUtil.isStringNotEmpty(passwordHeader)) {
+						String usernameSystem = configService.getStringValue(DemoConstant.USERNAME_SYSTEM);
+						String passwordSystem = configService.getStringValue(DemoConstant.PASSWORD_SYSTEM);
+						passwordHeader = EncryptionionUtil.getSHA256Encryption(passwordHeader);
+						if(usernameSystem.equals(usernameHeader)  && passwordSystem.equals(passwordHeader)) {
+							return true;
+						}
+					}
+					throw new DemoException(DemoErrorConstant.USER_AUTH_MISSING_CODE, DemoErrorConstant.USER_AUTH_MISSING_MSG);
 				}
 				
 				throw new DemoException(DemoErrorConstant.AUTHORIZATION_CODE, DemoErrorConstant.AUTHORIZATION_CODE_MSG);
